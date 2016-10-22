@@ -2,11 +2,13 @@ package net.swiftos.feizhai.Presenter.Controller;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 
 import net.swiftos.eventposter.Core.EventPoster;
 import net.swiftos.eventposter.Impls.ActivityLife.Annotation.ActivityLife;
 import net.swiftos.eventposter.Impls.ActivityLife.Entity.ActivityLifeType;
+import net.swiftos.eventposter.Impls.CustomEvent.Handler.CustomEventHandler;
 import net.swiftos.eventposter.Impls.ViewEvent.Annotation.OnClick;
 import net.swiftos.eventposter.Impls.ViewEvent.Handler.ViewEventHandler;
 import net.swiftos.eventposter.Impls.ViewEvent.Interface.OnViewAttachListener;
@@ -51,6 +53,7 @@ public class MainPresenter extends Presenter implements OnViewAttachListener,Mai
     @OnClick(context = MainContext,viewIds = R.id.button)
     public void OnClick(View view){
         mainView.setText("你好");
+        EventPoster.With(CustomEventHandler.class).As("你好").BroadCast();
     }
 
     @Override

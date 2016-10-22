@@ -12,7 +12,7 @@ import net.swiftos.feizhai.R;
 
 import static net.swiftos.feizhai.Protocol.MainProtocol.MainContext;
 
-public class MainActivity extends AppCompatActivity implements MainProtocol.View{
+public class MainActivity extends BaseActivity implements MainProtocol.View{
 
     private TextView tv;
     private Button button;
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements MainProtocol.View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EventPoster.RegistDeep(this);
         // Example of a call to a native method
         tv = (TextView) findViewById(R.id.sample_text);
         button = (Button) findViewById(R.id.button);
@@ -36,5 +37,6 @@ public class MainActivity extends AppCompatActivity implements MainProtocol.View
     protected void onDestroy() {
         super.onDestroy();
         EventPoster.With(ViewEventHandler.class).removeView(MainContext,button);
+        EventPoster.UnRegistDeep(this);
     }
 }

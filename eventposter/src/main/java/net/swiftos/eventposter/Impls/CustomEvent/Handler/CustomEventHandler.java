@@ -98,7 +98,7 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
             return;
         for (Map.Entry<String,CustomEventEntity> entry:map.entrySet()){
             CustomEventEntity entity = entry.getValue();
-            Vector invokers = Injecter.getInsts(entity.getInvokeType());
+            Vector invokers = Injecter.getAllInsts(entity.getInvokeType());
             if (invokers == null||invokers.size() == 0)
                 continue;
             for (Object invoker:invokers){
@@ -118,7 +118,7 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
         CustomEventEntity entity = map.get(name);
         if (entity == null)
             return;
-        Vector invokers = Injecter.getInsts(entity.getInvokeType());
+        Vector invokers = Injecter.getAllInsts(entity.getInvokeType());
         if (invokers == null)
             return;
         for (Object invoker:invokers){

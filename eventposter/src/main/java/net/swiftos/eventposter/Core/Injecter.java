@@ -2,6 +2,7 @@ package net.swiftos.eventposter.Core;
 
 import net.swiftos.eventposter.Cache.EventCache;
 import net.swiftos.eventposter.Cache.ReflectionCache;
+import net.swiftos.eventposter.Entity.ClassDependTree;
 import net.swiftos.eventposter.Entity.EventAnnoInfo;
 import net.swiftos.eventposter.Factory.HandlerFactory;
 import net.swiftos.eventposter.Interface.IEventEntity;
@@ -11,6 +12,7 @@ import net.swiftos.eventposter.Reflect.Parse.ClassParser;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Injecter {
 
     private static Map<Class,Vector> instMap = new ConcurrentHashMap<>();
+    private static ClassDependTree classTree = new ClassDependTree();
 
     public static void inject(Object object){
         Class clazz = object.getClass();
@@ -117,7 +120,43 @@ public class Injecter {
         return instMap.get(clazz);
     }
 
+    public static Vector getInstsWithDirectChildren(Class clazz){
+        List<Class> children = classTree.getDirectChildren(clazz);
+        Vector insts = new Vector();
+        if (insts != null)
+            insts.addAll(instMap.get(clazz));
+        if (children == null)
+            return insts;
+        for (Class child:children){
+            Vector childinsts = instMap.get(child);
+            if (childinsts != null)
+                insts.addAll(childinsts);
+        }
+        return insts;
+    }
+
+    public static Vector getAllInsts(Class clazz){
+        List<Class> children = classTree.getAllChildren(clazz,null);
+        Vector insts = new Vector();
+        Vector directInsts = instMap.get(clazz);
+        if (directInsts != null)
+            insts.addAll(directInsts);
+        if (children == null)
+            return insts;
+        for (Class child:children){
+            Vector childinsts = instMap.get(child);
+            if (childinsts != null)
+                insts.addAll(childinsts);
+        }
+        return insts;
+    }
+
+    public static ClassDependTree getClassTree(){
+        return classTree;
+    }
+
     public static void loadDeep(Object object,Class clazz){
+        classTree.insertDeep(clazz);
         Class<?> template = clazz;
         while (template != null && template != Object.class) {
             // 过滤掉基类 因为基类是不包含注解的

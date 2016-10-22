@@ -19,7 +19,7 @@ public class FeiZhaiApplication extends Application{
         super.onCreate();
         S.init(this);
         EventPoster.init(this);
-        EventPoster.PreLoad(new Class[]{MainActivity.class, MainPresenter.class});
+        EventPoster.PreLoadDeep(new Class[]{MainActivity.class, MainPresenter.class});
         Presenter.establish();
         Presenter.With(null).start(MainPresenter.class);
     }
