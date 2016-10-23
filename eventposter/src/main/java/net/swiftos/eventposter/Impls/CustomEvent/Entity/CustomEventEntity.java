@@ -20,6 +20,22 @@ public class CustomEventEntity implements IEventEntity{
     private Class parType;
     private Class invokeType;
     private boolean sticky;
+    private int count = 0;
+
+    public int addCount(){
+        count++;
+        return count;
+    }
+
+    public int cutCount(){
+        count--;
+        return count;
+    }
+
+    public void clearCount(){
+        count = 0;
+        return;
+    }
 
     public boolean isSticky() {
         return sticky;

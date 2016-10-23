@@ -61,7 +61,9 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
             map = new ConcurrentHashMap<>();
             eventMap.put(eventEntity.getParType(),map);
         }
-        map.put(eventEntity.getName(),eventEntity);
+        eventEntity.addCount();
+        if (!map.containsKey(eventEntity.getName()));
+            map.put(eventEntity.getName(),eventEntity);
         if (eventEntity.isSticky()){
             Object value = stickyMap.get(eventEntity.getParType());
             if (value != null) {
@@ -77,9 +79,13 @@ public class CustomEventHandler implements IHandler<CustomEventEntity>{
     @Override
     public void unload(CustomEventEntity eventEntity, Object object) {
         Map<String,CustomEventEntity> map = eventMap.get(eventEntity.getParType());
-        if (map == null)
-            return;
-        map.remove(eventEntity.getName());
+        if (map == null) return;
+        CustomEventEntity entity = map.get(eventEntity.getName());
+        if (entity == null) return;
+        if (entity.cutCount() <= 0) {
+            entity.clearCount();
+            map.remove(eventEntity.getName());
+        }
     }
 
     @Override
