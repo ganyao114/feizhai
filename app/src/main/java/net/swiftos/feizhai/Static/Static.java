@@ -5,4 +5,5 @@ package net.swiftos.feizhai.Static;
  */
 
 public class Static {
+    public final static String DEFAULT_URL = "";
 }

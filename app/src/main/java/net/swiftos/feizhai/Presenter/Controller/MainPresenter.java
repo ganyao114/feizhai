@@ -14,6 +14,7 @@ import net.swiftos.eventposter.Impls.ViewEvent.Handler.ViewEventHandler;
 import net.swiftos.eventposter.Impls.ViewEvent.Interface.OnViewAttachListener;
 import net.swiftos.eventposter.Presenter.IPresenter;
 import net.swiftos.eventposter.Presenter.Presenter;
+import net.swiftos.feizhai.Model.Event.LoginedEvent;
 import net.swiftos.feizhai.Protocol.MainProtocol;
 import net.swiftos.feizhai.R;
 import net.swiftos.feizhai.View.Activity.MainActivity;
@@ -53,7 +54,7 @@ public class MainPresenter extends Presenter implements OnViewAttachListener,Mai
     @OnClick(context = MainContext,viewIds = R.id.button)
     public void OnClick(View view){
         mainView.setText("你好");
-        EventPoster.With(CustomEventHandler.class).As("你好").BroadCast();
+        EventPoster.With(CustomEventHandler.class).As(new LoginedEvent()).BroadCast();
     }
 
     @Override

@@ -1,7 +1,9 @@
 package net.swiftos.feizhai.View.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ public class MainActivity extends BaseActivity implements MainProtocol.View{
         tv = (TextView) findViewById(R.id.sample_text);
         button = (Button) findViewById(R.id.button);
         EventPoster.With(ViewEventHandler.class).addView(MainContext,button);
+        startActivity(new Intent(this,HomeActivity.class));
     }
 
     @Override
@@ -36,6 +39,7 @@ public class MainActivity extends BaseActivity implements MainProtocol.View{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.e("gy","destroy");
         EventPoster.With(ViewEventHandler.class).removeView(MainContext,button);
         EventPoster.UnRegistDeep(this);
     }

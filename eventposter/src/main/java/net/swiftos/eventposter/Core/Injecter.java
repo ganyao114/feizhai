@@ -47,17 +47,7 @@ public class Injecter {
                 }
             }
         }
-        Class<?> template = clazz;
-        while (template != null && template != Object.class) {
-            // 过滤掉基类 因为基类是不包含注解的
-            String clazzName = template.getName();
-            if (clazzName.startsWith("java.") || clazzName.startsWith("javax.")
-                    || clazzName.startsWith("android.") || clazz.equals(Presenter.class)) {
-                break;
-            }
-            load(object,template);
-            template = template.getSuperclass();
-        }
+        loadDeep(object,clazz);
         instMap.get(clazz).add(object);
     }
 
@@ -165,7 +155,7 @@ public class Injecter {
                     || clazzName.startsWith("android.") || clazz.equals(Presenter.class)) {
                 break;
             }
-            load(object, clazz);
+            load(object, template);
             template = template.getSuperclass();
         }
     }
