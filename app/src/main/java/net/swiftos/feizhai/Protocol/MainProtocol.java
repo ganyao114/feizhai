@@ -15,4 +15,8 @@ public interface MainProtocol {
     public interface Presenter{
 
     }
+
+    public interface Model{
+
+    }
 }

@@ -15,6 +15,8 @@ import android.view.MenuItem;
 
 import net.swiftos.eventposter.Core.EventPoster;
 import net.swiftos.eventposter.Impls.ViewEvent.Handler.ViewEventHandler;
+import net.swiftos.feizhai.Component.AppComponent;
+import net.swiftos.feizhai.Presenter.Controller.BasePresenter;
 import net.swiftos.feizhai.Protocol.MainProtocol;
 import net.swiftos.feizhai.R;
 
@@ -24,7 +26,6 @@ public class HomeActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
         EventPoster.RegistDeep(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,6 +55,26 @@ public class HomeActivity extends BaseActivity
         super.onDestroy();
         EventPoster.UnRegistDeep(this);
         EventPoster.With(ViewEventHandler.class).removeView(MainProtocol.MainContext,findViewById(R.id.button));
+    }
+
+    @Override
+    protected int getContentLayout() {
+        return R.layout.activity_home;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected BasePresenter setupActivityComponent(AppComponent appComponent) {
+        return null;
     }
 
     @Override

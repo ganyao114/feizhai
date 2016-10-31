@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import net.swiftos.eventposter.Core.EventPoster;
 import net.swiftos.eventposter.Impls.ViewEvent.Handler.ViewEventHandler;
+import net.swiftos.feizhai.Component.AppComponent;
+import net.swiftos.feizhai.Presenter.Controller.BasePresenter;
 import net.swiftos.feizhai.Protocol.MainProtocol;
 import net.swiftos.feizhai.R;
 
@@ -22,7 +24,6 @@ public class MainActivity extends BaseActivity implements MainProtocol.View{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         EventPoster.RegistDeep(this);
         // Example of a call to a native method
         tv = (TextView) findViewById(R.id.sample_text);
@@ -42,5 +43,25 @@ public class MainActivity extends BaseActivity implements MainProtocol.View{
         Log.e("gy","destroy");
         EventPoster.With(ViewEventHandler.class).removeView(MainContext,button);
         EventPoster.UnRegistDeep(this);
+    }
+
+    @Override
+    protected int getContentLayout() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected BasePresenter setupActivityComponent(AppComponent appComponent) {
+        return null;
     }
 }
