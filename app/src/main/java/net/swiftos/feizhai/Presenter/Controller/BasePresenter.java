@@ -2,8 +2,7 @@ package net.swiftos.feizhai.Presenter.Controller;
 
 
 import net.swiftos.eventposter.Presenter.Presenter;
-import net.swiftos.feizhai.Model.Bean.ErrorResponse;
-import net.swiftos.feizhai.Model.Bean.IResponse;
+import net.swiftos.feizhai.Model.Source.BaseModel;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -12,7 +11,7 @@ import rx.subscriptions.CompositeSubscription;
  * Created by ganyao on 2016/10/26.
  */
 
-public abstract class BasePresenter extends Presenter{
+public abstract class BasePresenter extends Presenter implements BaseModel.IBaseCallBack {
 
     protected CompositeSubscription mCompositeSubscription;
 
@@ -39,9 +38,6 @@ public abstract class BasePresenter extends Presenter{
         onUnsubscribe();
     }
 
-    public interface IBaseCallBack{
-        public void onSuccess(IResponse t);
-        public void onFailed(ErrorResponse error);
-    }
+
 
 }

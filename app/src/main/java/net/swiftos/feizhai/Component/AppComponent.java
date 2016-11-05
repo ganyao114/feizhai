@@ -2,10 +2,9 @@ package net.swiftos.feizhai.Component;
 
 import android.content.Context;
 
-import net.swiftos.eventposter.Core.EventPoster;
 import net.swiftos.feizhai.Model.Api.FeizhaiDaoApi;
 import net.swiftos.feizhai.Model.Api.FeizhaiHttpApi;
-import net.swiftos.feizhai.Model.Http.BaseModel;
+import net.swiftos.feizhai.Model.Source.BaseModel;
 import net.swiftos.feizhai.Module.AppModule;
 import net.swiftos.feizhai.Module.FeizhaiServiceModule;
 import net.swiftos.feizhai.Presenter.Controller.BasePresenter;

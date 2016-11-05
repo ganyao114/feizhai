@@ -1,10 +1,12 @@
-package net.swiftos.feizhai.Model.Http;
+package net.swiftos.feizhai.Model.Source;
 
 
 import net.swiftos.feizhai.Application.FeiZhaiApplication;
 import net.swiftos.feizhai.Exception.FeizhaiHttpServiceException;
 import net.swiftos.feizhai.Model.Api.FeizhaiHttpApi;
 import net.swiftos.feizhai.Model.Bean.BaseResponse;
+import net.swiftos.feizhai.Model.Bean.ErrorResponse;
+import net.swiftos.feizhai.Model.Bean.IResponse;
 import net.swiftos.feizhai.Utils.FeizhaiLog;
 
 import javax.inject.Inject;
@@ -43,6 +45,11 @@ public class BaseModel {
             }
             return data;
         }
+    }
+
+    public interface IBaseCallBack{
+        void onSuccess(IResponse t);
+        void onFailure(ErrorResponse error);
     }
 
 }
