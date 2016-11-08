@@ -5,11 +5,15 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import net.swiftos.eventposter.Impls.CustomEvent.Annotation.InjectEvent;
 import net.swiftos.feizhai.Application.FeiZhaiApplication;
 import net.swiftos.feizhai.Component.AppComponent;
+import net.swiftos.feizhai.Model.Event.LoginedEvent;
 import net.swiftos.feizhai.Presenter.Controller.BasePresenter;
 
 import butterknife.ButterKnife;
@@ -36,6 +40,11 @@ public abstract class BaseActivity extends AppCompatActivity{
             basePresenter.onViewInited();
         }
         initData();
+    }
+
+    @InjectEvent
+    public void onEvent(LoginedEvent event) {
+        Log.e("gy", "event");
     }
 
     @Override
